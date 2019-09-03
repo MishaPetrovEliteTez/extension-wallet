@@ -1,0 +1,9 @@
+{
+  "name": "elite-tezos-wallet",
+  "private": true,
+  "version": "0.1.0",
+  "dependencies": {
+    "crypto-js": "^3.1.9"
+  },
+  "devDependencies": {}
+}

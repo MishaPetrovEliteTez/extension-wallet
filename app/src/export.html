@@ -1,0 +1,53 @@
+<div class="main-div">
+  <link rel="stylesheet" href="styles/main-style.css">
+  <div id="wallets-list">
+<!--    <div>
+      <button id="save">Save</button>
+      <button id="load">Read</button>
+      <button id="storeUserPrefs">storeUserPrefs</button>
+      <div>
+        <label>
+          <input id="channels" type="text" name="passwd" placeholder="channels">
+        </label>
+        <label>
+          <input id="keywords" type="text" name="passwd" placeholder="keywords">
+        </label>
+      </div>
+      <div id="status">
+      </div>
+      <button id="exportToDisk">exportToDisk</button>
+    </div>-->
+    <div id="wallets">
+
+    </div>
+  </div>
+  <div id="wallet-decrypt" style="display: none">
+    <a href="main.html">to main!</a>
+    <div>
+      <p id="public"></p>
+      <p id="encrypted-secret"></p>
+      <div>
+        <label for="decrypt-pass-input">Encrypt password:<br/>
+          <input type="password" id="decrypt-pass-input" placeholder="********">
+        </label>
+        <button id="decrypt-btn">Decrypt (Show private key)</button>
+      </div>
+      <div id="decrypted-secret"></div>
+    </div>
+  </div>
+  <script src="../bower_components/crypto-js/crypto-js.js" type="text/javascript"></script>
+  <script src="scripts/wallets.js" type="text/javascript"></script>
+  <script src="scripts/export-wallet.js" type="text/javascript"></script>
+</div>
+<style>
+  .error {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ff2403;
+  }
+  .success {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(23, 15, 115);
+  }
+</style>

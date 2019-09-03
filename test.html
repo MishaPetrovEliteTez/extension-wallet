@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<a href="javascript:go1();">Click me</a>
+<a href="javascript:go2();">Click me</a>
+<a href="javascript:testOperation();">testOperation</a>
+<script>
+    var go1 = function () {
+        // var event = new Event("confirm-transaction", {bubbles: "jskjdfksdjfhskdjfsdjfjd"});
+        // event.initEvent("confirm-transaction");
+        // document.dispatchEvent(event);
+        var evt = new CustomEvent('Event', {detail: "true"});
+        evt.initEvent("test-event");
+        document.dispatchEvent(evt);
+    };
+    var go2 = function () {
+        var evt = new CustomEvent('Event', {detail: "Any Object Here"});
+        evt.initEvent("confirm-transaction");
+        document.dispatchEvent(evt);
+    };
+
+    function testOperation() {
+        eztz.node.setProvider('http://alphanet-node.tzscan.io');
+        let keys = {pk: "tz1QLLbmqmrnfy7pBSzLCsY4RGSoB7t7Y72q"};
+        transfer(
+            keys,
+            'tz1YWtADpgGehcTFqxMapiJcfLgzzL79aDJQ',
+            0.000131,
+            10000
+        )
+    }
+
+    function transfer(keys, to, amount, fee, parameter, gasLimit, storageLimit, revealFee) {
+        if (typeof revealFee == 'undefined') revealFee = '1269';
+        if (typeof gasLimit == 'undefined') gasLimit = '10200';
+        if (typeof storageLimit == 'undefined') storageLimit = '300';
+        var operation = {
+            "kind": "transaction",
+            "fee": fee,
+            "gas_limit": gasLimit,
+            "storage_limit": storageLimit,
+            "amount": eztz.utility.mutez(amount).toString(),
+            "destination": to
+        };
+        console.log("Operation: ");
+        console.log(operation);
+        if (typeof parameter == 'undefined') parameter = false;
+        if (parameter) {
+            operation.parameters = eztz.utility.sexp2mic(parameter);
+        }
+
+        let evt = new CustomEvent('Event', {
+            detail: {
+                operation: operation,
+                revealFee: revealFee
+            }
+        });
+        evt.initEvent("confirm-transaction");
+        document.dispatchEvent(evt);
+
+        // return prepareBytes(from, operation, keys, false, revealFee);
+    }
+
+    /*function prepareBytes(from, operation, keys, revealFee) {
+        if (typeof revealFee == 'undefined') revealFee = '1269';
+        console.log(operation);
+        return eztz.rpc.prepareOperation(from, operation, keys, revealFee).then(function (fullOp) {
+            console.log(fullOp);
+            var evt = new CustomEvent('Event', {
+                detail: {
+                    sender: from,
+                    fullOp: fullOp
+                }
+            });
+            evt.initEvent("sign-transaction");
+            document.dispatchEvent(evt);
+        })
+    }*/
+</script>
+<script src="app/src/scripts/eztz.min.js"></script>
+</html>

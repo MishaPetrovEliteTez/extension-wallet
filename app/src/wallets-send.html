@@ -1,0 +1,28 @@
+<div class="main-div">
+  <link rel="stylesheet" href="styles/main-style.css">
+  <link rel="stylesheet" href="styles/fontawesome-free-5.10.2-web/css/v4-shims.css">
+  <link rel="stylesheet" href="styles/fontawesome-free-5.10.2-web/css/all.css">
+  <pre id="transaction-data"></pre>
+  <div id="in-progress" style="display: none">
+    <p id="transaction-progress"><strong>Transaction sending... <i class="fa fa-refresh fa-spin"></i></strong></p>
+  </div>
+  <p id="public-key"></p>
+  <div id="wallets">
+
+  </div>
+  <div id="decrypt" style="display: none">
+    <label for="decrypt-pass-input">Password for decrypting:<br/>
+      <input type="password" id="decrypt-pass-input" placeholder="********">
+    </label>
+    <button id="send-btn">Send</button>
+  </div>
+  <script src="scripts/wallets.js" type="text/javascript"></script>
+  <script src="scripts/wallets-send.js" type="text/javascript"></script>
+  <script src="scripts/eztz.min.js" type="text/javascript"></script>
+</div>
+<style>
+  pre {
+    font-size: 1rem;
+    margin: 0;
+  }
+</style>

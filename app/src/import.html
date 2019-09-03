@@ -1,0 +1,180 @@
+<div class="main-div">
+  <link rel="stylesheet" href="styles/main-style.css">
+  <h2>Import new wallet</h2>
+
+  <div id="wallet" style="display: none">
+    <p id="wallet-public"></p>
+    <p id="wallet-private-encrypt"></p>
+  </div>
+
+  <div class="dropdown" id="dropdown-id">
+    <button id="dropdown-list" class="dropbtn">Import by private key</button>
+    <div id="dropdown" class="dropdown-content">
+      <a href="#" id="import-private">Import by private key</a>
+      <a href="#" id="import-mnemonic">Import by mnemonic phase</a>
+    </div>
+  </div>
+
+  <div id="form-private">
+    <form>
+      <label for="private-key">Private key:<br/>
+        <textarea id="private-key" placeholder="Private key"></textarea>
+      </label>
+    </form>
+  </div>
+
+  <div id="form-mnemonic" style="display: none">
+    <form>
+      <label for="mnemonic-phrase">Mnemonic phrase:<br/>
+        <textarea id="mnemonic-phrase" placeholder="Mnemonic phrase"></textarea>
+      </label>
+    </form>
+    <label>
+      <input type="password" id="mnemonic-passwd" placeholder="********">
+    </label>
+  </div>
+
+  <div id="encrypt-pass">
+    <label for="encrypt-pass">Password for encrypting:<br/>
+      <input type="password" id="encrypt-pass-input" placeholder="********">
+    </label>
+    <p id="password-strength" class="empty">Enter password</p>
+    <button id="next-btn" class="nextbtn">Next</button>
+  </div>
+
+  <div id="save" style="display: none">
+    <button id="save-btn" class="savebtn">Save</button>
+    <button id="back-btn" class="backbtn">Back</button>
+  </div>
+
+  <div id="finish" style="display: none">
+    <p id="finish-msg">Save success!</p>
+    <a href="main.html">to main!</a>
+  </div>
+
+  <script src="scripts/import-wallet.js" type="text/javascript"></script>
+  <script src="scripts/eztz.min.js" type="text/javascript"></script>
+  <script src="../bower_components/crypto-js/crypto-js.js" type="text/javascript"></script>
+  <script src="../bower_components/zxcvbn/dist/zxcvbn.js" type="text/javascript"></script>
+
+  <style>
+    .dropbtn {
+      background-color: rgb(135, 135, 135);
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropbtn:hover, .dropbtn:focus {
+      background-color: rgb(106, 106, 106);
+    }
+
+    .nextbtn {
+      background-color: #3498DB;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nextbtn:hover, .nextbtn:focus {
+      background-color: #2980B9;
+    }
+
+    .backbtn {
+      background-color: #dbca41;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .backbtn:hover, .backbtn:focus {
+      background-color: #b99604;
+    }
+
+    .savebtn {
+      background-color: #32db52;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .savebtn:hover, .savebtn:focus {
+      background-color: #1bb91e;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown a:hover {
+      background-color: #ddd;
+    }
+
+    .show {
+      display: block;
+    }
+
+
+    .empty {
+      text-decoration: none;
+      font-weight: bold;
+      color: rgb(147, 147, 147);
+    }
+
+    .very-weak {
+      text-decoration: none;
+      font-weight: bold;
+      color: #ff2403;
+    }
+
+    .weak {
+      text-decoration: none;
+      font-weight: bold;
+      color: #ffac11;
+    }
+
+    .good {
+      text-decoration: none;
+      font-weight: bold;
+      color: #fdff02;
+    }
+
+    .strong {
+      text-decoration: none;
+      font-weight: bold;
+      color: #95ff01;
+    }
+
+    .very-strong {
+      text-decoration: none;
+      font-weight: bold;
+      color: #12ff26;
+    }
+  </style>
+</div>

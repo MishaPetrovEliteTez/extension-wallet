@@ -1,0 +1,48 @@
+{
+  "name": "Elite Tezos wallet",
+  "description": "Elite Tezos wallet",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "new-tab-page",
+    "default_popup": "src/main.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "content.js",
+        "bower_components/crypto-js/crypto-js.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "bower_components/crypto-js/crypto-js.js",
+      "src/scripts/eztz.min.js"
+    ]
+  },
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [],
+    "accept_tls_channel_id": true
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "bower_components/crypto-js/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}
