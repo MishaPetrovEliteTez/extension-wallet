@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-function showAllWallets(fun) {
+function showAllWallets(func) {
   let walletsEl = document.getElementById('wallets');
 
   // chrome.runtime.sendMessage(chrome.runtime.id, {type : 'showAllWallets'});
@@ -19,7 +19,7 @@ function showAllWallets(fun) {
 
     if (map != null)
       new Map(JSON.parse(map)).forEach((v, k, map) => {
-        fun(k, v, walletsEl)
+        func(k, v, walletsEl)
       });
     else
       walletsEl.innerHTML = '<p>Wallets not found!</p>'
@@ -40,24 +40,11 @@ function load(key) {
   });
 }
 
-
-function testOperation() {
-  eztz.node.setProvider('http://alphanet-node.tzscan.io');
-  let keys = { pk : "tz1QLLbmqmrnfy7pBSzLCsY4RGSoB7t7Y72q" };
-  transfer(
-    'tz1QLLbmqmrnfy7pBSzLCsY4RGSoB7t7Y72q',
-    keys,
-    'tz1YWtADpgGehcTFqxMapiJcfLgzzL79aDJQ',
-    2.45,
-    10000
-  )
-}
-
 function transfer (from, keys, to, amount, fee, parameter, gasLimit, storageLimit, revealFee) {
   if (typeof revealFee == 'undefined') revealFee = '1269';
   if (typeof gasLimit == 'undefined') gasLimit = '10200';
   if (typeof storageLimit == 'undefined') storageLimit = '300';
-  var operation = {
+  let operation = {
     "kind": "transaction",
     "fee": fee,
     "gas_limit": gasLimit,

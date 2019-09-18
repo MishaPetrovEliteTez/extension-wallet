@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 chrome.runtime.sendMessage(chrome.runtime.id, {type: 'show-operation-info'});
 
-showAllWallets(callbackButton);
+showAllWallets(callbackButtons);
 
-function callbackButton(k, v, walletsEl) {
+function callbackButtons(k, v, walletsEl) {
   let btn = document.createElement("button");
   btn.className = "wallet-btn";
   btn.innerHTML = k;

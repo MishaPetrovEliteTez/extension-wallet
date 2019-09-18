@@ -1,4 +1,5 @@
 let transaction;
+let webPageTabId = null;
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   // chrome.tabs.create({url:"tab/main.html"});
@@ -25,7 +26,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case "confirm-transaction": {
       console.log(msg);
       transaction = msg;
-      // window.open("src/wallets.html", "extension_popup", "width=550,height=700,status=no,scrollbars=yes,resizable=no");
       window.open("src/wallets-send.html", "extension_popup", "width=550,height=700,status=no,scrollbars=yes,resizable=no");
       break
     }
@@ -43,10 +43,20 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case "select-wallet": {
       console.log("chrome.tabs.query");
       chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-        console.log("chrome.tabs.sendMessage");
+        webPageTabId = tabs[0].id;
         chrome.tabs.sendMessage(tabs[0].id, {action: "open_dialog_box"});
       });
       window.open("src/wallets.html", "extension_popup", "width=550,height=700,status=no,scrollbars=yes,resizable=no");
+      break
+    }
+    case "wallet-selected": {
+      console.log(msg);
+      chrome.tabs.query({active: true, currentWindow: true}, () => {
+        chrome.tabs.sendMessage(webPageTabId, {
+          action: "wallet_selected",
+          wallet: msg.wallet
+        });
+      });
       break
     }
     case "sign-transaction": {
@@ -75,8 +85,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
                 data: fullOp
               });
             });
-          }
-          else {
+          } else {
             chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
               chrome.tabs.sendMessage(tabs[0].id, {
                 action: "error",
