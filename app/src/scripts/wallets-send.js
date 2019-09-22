@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('in-progress').style.display = 'block';
     let keys = pks;
     if(!operation) operation = JSON.parse(document.getElementById('transaction-data').innerText);
+
+    if (operation.parameters.email.length > 0)
+      operation.parameters = '{"prim":"Left","args":[{"string":"' + operation.parameters.email + '"}]}';
+    else
+      delete operation.parameters;
+
     console.log(operation);
     prepareBytes(
       keys.pkh,
