@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!operation) operation = JSON.parse(document.getElementById('transaction-data').innerText);
 
     if (operation.parameters.email.length > 0)
-      operation.parameters = '{"prim":"Left","args":[{"string":"' + operation.parameters.email + '"}]}';
+      operation.parameters = JSON.parse('{"prim":"Left","args":[{"string":"' + operation.parameters.email + '"}]}');
     else
       delete operation.parameters;
 
@@ -66,6 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
         type: "sign-transaction",
         data: data
       });
+    }).catch((err) => {
+      document.getElementById('transaction-progress').innerText = "Error: " + err;
+      console.error(err);
     });
   })
 });

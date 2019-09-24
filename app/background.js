@@ -32,7 +32,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case "show-operation-info": {
       console.log(msg);
       chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-        console.log("chrome.tabs.sendMessage");
         chrome.tabs.sendMessage(tabs[0].id, {
           action: 'show-operation-info',
           data: transaction.data
